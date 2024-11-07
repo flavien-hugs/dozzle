@@ -1,0 +1,5 @@
+users:
+    admin:
+        email: haf@unsta.dev
+        name: admin
+        password: $2a$11$Jrr3UnaW1UaHsAawGb5XreENsSTgVaPYiGYKHKipvrDV.JfFHH576
