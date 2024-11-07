@@ -7,13 +7,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/admin/profile.json:/data/config/profile.json:ro
       - ./data/users.yml:/data/users.yml:ro
-    ports:
-      - "8880:8080"
     healthcheck:
       test: [ "CMD", "/dozzle", "healthcheck" ]
       interval: 3s
       timeout: 30s
       retries: 5
       start_period: 30s
-    env_file:
-      - ./dotenv/app.env
