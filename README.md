@@ -36,9 +36,3 @@ conteneurs.
   # Créer un fichier .env
   cp dotenv/app.env.example dotenv/app.env
 ```
-
-### Configuration de l'application
-```bash
-  # Créer un fichier .env
-  cp dotenv/app.env.example dotenv/app.env
-```

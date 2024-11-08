@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   dozzle.local:
     image: amir20/dozzle:latest
