@@ -3,10 +3,8 @@
 .idea/
 .DS_Store
 .venv
-dotenv/
 **/.vscode
 **/coverage
-**/.env
 **/.aws
 **/.ssh
 **/venv
