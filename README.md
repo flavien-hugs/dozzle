@@ -1,38 +1,55 @@
-# DOZZLE 
+# DOZZLE
 
-Dozzle est un projet open source sponsorisé par Docker OSS. Il s'agit d'un 
-visualiseur de journaux conçu pour simplifier la surveillance et le débogage des
-conteneurs.
+Dozzle est un projet open source sponsorisé par Docker OSS. Il s'agit d'un visualiseur de journaux en temps réel pour les
+conteneurs Docker, conçu pour simplifier la surveillance et le débogage.
 
-### Générer un fichier de configuration pour les utilisateurs
+### 1. Configuration de l'application
+
+Avant de lancer le service, vous devez configurer les variables d'environnement.
+
+Créez un fichier `.env` à la racine du projet en copiant l'exemple :
+
 ```bash
-  docker run amir20/dozzle generate admin --password <user-password> --email \
-    <user-email> --name <username> > data/users.yml
+cp dotenv/app.env.example dotenv/app.env
 ```
 
-### Configuration de l'application
+Modifiez le fichier `dotenv/app.env` et assurez-vous que les variables suivantes sont définies pour correspondre à votre
+configuration de reverse proxy :
+
+- `DOZZLE_HOSTNAME`
+- `DOZZLE_VIRTUAL_HOST`
+- `DOZZLE_LETSENCRYPT_HOST`
+- `DOZZLE_LETSENCRYPT_EMAIL`
+
+### 2. Générer un fichier de configuration pour les utilisateurs
+
+Pour l'authentification, Dozzle utilise un fichier `users.yml`. Vous pouvez en générer un pour l'utilisateur `admin` avec la
+commande suivante:
+
 ```bash
-  # Créer un fichier .env
-  cp dotenv/app.env.example dotenv/app.env
+docker run --rm -v "$(pwd)/data:/data" amir20/dozzle generate-users
 ```
+*Suivez les instructions pour créer les utilisateurs.*
 
-### Démarrer Dozzle
+*Note : Cette commande montera le répertoire `data` local dans le conteneur et y créera le fichier `users.yml`.*
+
+### 3. Démarrer et Arrêter Dozzle
+
+Pour démarrer le service en arrière-plan :
+
 ```bash
-  docker compose --env-file=dotenv/app.env -f docker-compose.yml up -d
+docker compose --env-file=dotenv/app.env -f docker-compose.yml up -d
 ```
 
-### Arrêter Dozzle
+Pour arrêter le service :
+
 ```bash
-  docker compose --env-file=dotenv/app.env -f docker-compose.yml down
+docker compose --env-file=dotenv/app.env -f docker-compose.yml down
 ```
 
-### Accéder à Dozzle
-```
-  http://localhost:8080
-```
+### 4. Accéder à Dozzle
 
-### Configuration de l'application
-```bash
-  # Créer un fichier .env
-  cp dotenv/app.env.example dotenv/app.env
-```
+Une fois le conteneur démarré, vous pouvez accéder à Dozzle via l'URL que vous avez configurée dans la variable d'environnement 
+`DOZZLE_VIRTUAL_HOST`.
+
+Par exemple : `http://dozzle.votredomaine.com`
