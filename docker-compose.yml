@@ -1,18 +1,29 @@
 services:
   dozzle.local:
     image: amir20/dozzle:latest
-    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data/admin/profile.json:/data/config/profile.json:ro
       - ./data/users.yml:/data/users.yml:ro
-    ports:
-      - "9080:8080"
+      - ${DOZZLE_USER_DIRS:-./data}:/data
+    expose:
+      - 8080
+    networks:
+        - proxy
+    environment:
+        DOZZLE_AUTH_PROVIDER: simple
+        DOZZLE_NO_ANALYTICS: true
+        DOZZLE_HOSTNAME: $DOZZLE_HOSTNAME
+        VIRTUAL_HOST: $DOZZLE_VIRTUAL_HOST
+        LETSENCRYPT_HOST: $DOZZLE_LETSENCRYPT_HOST
+        LETSENCRYPT_EMAIL: $DOZZLE_LETSENCRYPT_EMAIL
     healthcheck:
       test: [ "CMD", "/dozzle", "healthcheck" ]
       interval: 3s
       timeout: 30s
       retries: 5
       start_period: 30s
-    env_file:
-      - dotenv/app.env
+
+networks:
+  proxy:
+    external: true

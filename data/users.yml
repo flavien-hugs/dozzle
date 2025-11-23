@@ -1,5 +1,7 @@
 users:
+    # "admin" here is username
     admin:
-        email: haf@unsta.dev
         name: admin
+        email: devops@unsta.dev
+        # Just sha-256 which can be computed with "echo -n p@55word | shasum -a 256"
         password: $2a$11$Jrr3UnaW1UaHsAawGb5XreENsSTgVaPYiGYKHKipvrDV.JfFHH576
