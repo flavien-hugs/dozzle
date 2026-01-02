@@ -1,6 +1,6 @@
 services:
     dozzle.local:
-        image: amir20/dozzle:latest
+        image: amir20/dozzle:${DOZZLE_VERSION:-pr-4307}
         container_name: dozzle
         restart: always
         volumes:
