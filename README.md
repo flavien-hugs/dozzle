@@ -70,7 +70,7 @@ users:
 
 Lancez le service en mode détaché :
 ```bash
-docker compose --env-file=dotenv/app.env -f docker-compose.yml up -d
+docker compose --env-file=.env -f docker-compose.yml up -d
 ```
 
 Vérifiez les logs pour confirmer le bon démarrage :
@@ -87,10 +87,10 @@ Accédez ensuite à votre instance via l'URL définie (ex: `https://logs.votredo
 2. Tirez la nouvelle image et redémarrez :
 ```bash
 docker compose pull
-docker compose --env-file=dotenv/app.env -f docker-compose.yml up -d
+docker compose --env-file=.env -f docker-compose.yml up -d
 ```
 
 **Arrêter le service :**
 ```bash
-docker compose --env-file=dotenv/app.env -f docker-compose.yml down
+docker compose --env-file=.env -f docker-compose.yml down
 ```
